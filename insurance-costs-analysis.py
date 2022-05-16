@@ -72,8 +72,22 @@ class PatientsInfo:
         print ("Average Yearly Medical Insurance Charges: " +  
                 str(round(total_charges/len(self.patients_charges), 2)) + " dollars.")
 
+    # method to create dictionary with all patients information
+    def create_dictionary(self):
+        self.patients_dictionary = {}
+        self.patients_dictionary["age"] = [int(age) for age in self.patients_ages]
+        self.patients_dictionary["sex"] = self.patients_sexes
+        self.patients_dictionary["bmi"] = self.patients_bmis
+        self.patients_dictionary["children"] = self.patients_num_children
+        self.patients_dictionary["smoker"] = self.patients_smoker_statuses
+        self.patients_dictionary["regions"] = self.patients_regions
+        self.patients_dictionary["charges"] = self.patients_charges
+        return self.patients_dictionary
+
 patient_info = PatientsInfo(ages, sexes, bmis, num_children, smoker_statuses, regions, insurance_charges)
 patient_info.analyze_ages()
 patient_info.analyze_sexes()
 patient_info.unique_regions()
 patient_info.average_charges()
+dict1=patient_info.create_dictionary()
+print(dict1)
