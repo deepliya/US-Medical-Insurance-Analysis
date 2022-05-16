@@ -18,4 +18,9 @@ def load_list_data(lst, csv_file, column_name):
             lst.append(row[column_name])
 
 load_list_data(ages, 'insurance.csv', 'age')
-print(ages)
+load_list_data(sexes, 'insurance.csv', 'sex')
+load_list_data(bmis, 'insurance.csv', 'bmi')
+load_list_data(num_children, 'insurance.csv', 'children')
+load_list_data(smoker_statuses, 'insurance.csv', 'smoker')
+load_list_data(regions, 'insurance.csv', 'region')
+load_list_data(insurance_charges, 'insurance.csv', 'charges')
