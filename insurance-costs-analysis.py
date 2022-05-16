@@ -55,7 +55,25 @@ class PatientsInfo:
                 males += 1
         print("Count for female: ", females)
         print("Count for male: ", males)
+    
+    # functio to find each unique region patients are from
+    def unique_regions(self):
+        unique_regions = []
+        for region in self.patients_regions:
+            if region not in unique_regions: 
+                unique_regions.append(region)
+        print (unique_regions)
+
+    # method to find average yearly medical charges for patients in insurance.csv
+    def average_charges(self):
+        total_charges = 0
+        for charge in self.patients_charges:
+            total_charges += float(charge)
+        print ("Average Yearly Medical Insurance Charges: " +  
+                str(round(total_charges/len(self.patients_charges), 2)) + " dollars.")
 
 patient_info = PatientsInfo(ages, sexes, bmis, num_children, smoker_statuses, regions, insurance_charges)
 patient_info.analyze_ages()
 patient_info.analyze_sexes()
+patient_info.unique_regions()
+patient_info.average_charges()
