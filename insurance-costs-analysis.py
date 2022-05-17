@@ -42,7 +42,7 @@ class PatientsInfo:
         self.patients_regions = patients_regions
         self.patients_charges = patients_charges
 
-    # function that calculates the average ages of patients in insurance.csv
+    # function that calculates the average of charges for patients in different age groups
     def analyze_ages(self):
         total_age = 0
         age_20 = 0
@@ -77,11 +77,11 @@ class PatientsInfo:
                 chg_g50 += charge
 
         print ("Average Patient Age: " + str(round(total_age/len(self.patients_ages), 2)) + " years")
-        print ("Average charges for patients below the age of 20: ", round(chg_20/age_20, 3))
-        print ("Average charges for patients between the age of 20 and 30: ", round(chg_30/age_30, 3))
-        print ("Average charges for patients between the age of 30 and 40: ", round(chg_40/age_40, 3))
-        print ("Average charges for patients between the age of 40 and 50: ", round(chg_50/age_50, 3))
-        print ("Average charges for patients above the age of 50: ", round(chg_g50/age_g50, 3))
+        print ("Average charges for patients below the age of 20: $", round(chg_20/age_20, 3))
+        print ("Average charges for patients between the age of 20 and 30: $", round(chg_30/age_30, 3))
+        print ("Average charges for patients between the age of 30 and 40: $", round(chg_40/age_40, 3))
+        print ("Average charges for patients between the age of 40 and 50: $", round(chg_50/age_50, 3))
+        print ("Average charges for patients above the age of 50         : $", round(chg_g50/age_g50, 3))
 
     # function that calculates the number of males and females in insurance.csv
     def analyze_sexes(self):
@@ -100,12 +100,64 @@ class PatientsInfo:
                 male_charges += charge
         avg_female = round(female_charges/females, 3)
         avg_male = round(male_charges/males, 3)
-        print("Count for female: ", females)
-        print("Average charges for a female:", avg_female)
-        print("Count for male: ", males)
-        print("Average charges for a male:", avg_male)
+        print("Count of females: ", females)
+        print("    Average charges: $", avg_female)
+        print("Count of males: ", males)
+        print("    Average charges: $", avg_male)
     
-    # functio to find each unique region patients are from
+    def analyze_bmi(self):
+        undr_wt = 0
+        norm_wt = 0
+        ovr_wt = 0
+        obese = 0
+        undr_ch = 0
+        norm_ch = 0
+        ovr_ch = 0
+        obese_ch = 0
+
+        for bmi, charge in zip(self.patients_bmis, self.patients_charges):
+            if bmi < 18.5:
+                undr_wt += 1
+                undr_ch += charge
+            if 15.5 <= bmi <= 24.9:
+                norm_wt += 1
+                norm_ch += charge
+            if 15.5 <= bmi <= 24.9:
+                ovr_wt += 1
+                ovr_ch += charge
+            if bmi >= 30.0:
+                obese += 1
+                obese_ch += charge
+        
+        print("Patients underweight: ", undr_wt)
+        print("    Average charges: $", round(undr_ch/undr_wt, 3))
+        print("Patients healthy weight: ", norm_wt)
+        print("    Average charges: $", round(norm_ch/norm_wt, 3))
+        print("Patients overweight: ", ovr_wt)
+        print("    Average charges: $", round(ovr_ch/ovr_wt, 3))
+        print("Patients obese: ", obese)
+        print("    Average charges: $", round(obese_ch/obese, 3), "\n")
+
+    def analyze_smokers(self):
+        smkrs = 0
+        non_smkrs = 0
+        smkr_ch = 0
+        nonsmk_ch = 0
+
+        for smkr, charge in zip(self.patients_smoker_statuses, self.patients_charges):
+            if smkr == 'yes':
+                smkrs += 1
+                smkr_ch += charge
+            else:
+                non_smkrs += 1
+                nonsmk_ch += charge
+        
+        print("Percentage of smokers in dataset: ", round(((smkrs/(smkrs+non_smkrs))*100), 3), "%")
+        print("    Average charge for a smoker: $", round(smkr_ch/smkrs, 3))
+        print("Percentage of non-smokers in dataset: ", round(((non_smkrs/(smkrs+non_smkrs))*100), 3), "%")
+        print("    Average charge for a non-smoker: $", round(nonsmk_ch/non_smkrs, 3))
+
+    # function to find each unique region patients are from
     def unique_regions(self):
         unique_regions = []
         for region in self.patients_regions:
@@ -136,6 +188,8 @@ class PatientsInfo:
 patient_info = PatientsInfo(ages, sexes, bmis, num_children, smoker_statuses, regions, insurance_charges)
 patient_info.analyze_ages()
 patient_info.analyze_sexes()
+patient_info.analyze_bmi()
+patient_info.analyze_smokers()
 patient_info.unique_regions()
 patient_info.average_charges()
 PatDict=patient_info.create_dictionary()
