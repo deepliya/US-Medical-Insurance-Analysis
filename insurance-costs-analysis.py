@@ -25,6 +25,11 @@ load_list_data(smoker_statuses, 'insurance.csv', 'smoker')
 load_list_data(regions, 'insurance.csv', 'region')
 load_list_data(insurance_charges, 'insurance.csv', 'charges')
 
+insurance_charges = [float(charge) for charge in insurance_charges ]
+num_children = [int(child) for child in num_children] 
+ages = [int(age) for age in ages] 
+bmis = [float(bmi) for bmi in bmis]
+
 class PatientsInfo:
     # init method that takes in each list parameter
     def __init__(self, patients_ages, patients_sexes, patients_bmis, patients_num_children, 
@@ -40,21 +45,65 @@ class PatientsInfo:
     # function that calculates the average ages of patients in insurance.csv
     def analyze_ages(self):
         total_age = 0
+        age_20 = 0
+        age_30 = 0
+        age_40 = 0
+        age_50 = 0
+        age_g50 = 0
+        chg_20 = 0
+        chg_30 = 0
+        chg_40 = 0
+        chg_50 = 0
+        chg_g50 = 0
+        
         for age in self.patients_ages:
-            total_age += int(age)
+            total_age += age
+
+        for age, charge in zip(self.patients_ages, self.patients_charges):
+            if age < 20:
+                age_20 += 1
+                chg_20 += charge
+            if 20 <= age < 30:
+                age_30 += 1
+                chg_30 += charge
+            if 30 <= age < 40:
+                age_40 += 1
+                chg_40 += charge
+            if 40 <= age < 50:
+                age_50 += 1
+                chg_50 += charge 
+            if age >= 50:
+                age_g50 += 1
+                chg_g50 += charge
+
         print ("Average Patient Age: " + str(round(total_age/len(self.patients_ages), 2)) + " years")
+        print ("Average charges for patients below the age of 20: ", round(chg_20/age_20, 3))
+        print ("Average charges for patients between the age of 20 and 30: ", round(chg_30/age_30, 3))
+        print ("Average charges for patients between the age of 30 and 40: ", round(chg_40/age_40, 3))
+        print ("Average charges for patients between the age of 40 and 50: ", round(chg_50/age_50, 3))
+        print ("Average charges for patients above the age of 50: ", round(chg_g50/age_g50, 3))
 
     # function that calculates the number of males and females in insurance.csv
     def analyze_sexes(self):
         females = 0
         males = 0
-        for sex in self.patients_sexes:
+        female_charges = 0
+        male_charges = 0
+        avg_female = 0
+        avg_male = 0
+        for sex, charge in zip(self.patients_sexes, self.patients_charges):
             if sex == 'female':
                 females += 1
+                female_charges += charge
             elif sex == 'male':
                 males += 1
+                male_charges += charge
+        avg_female = round(female_charges/females, 3)
+        avg_male = round(male_charges/males, 3)
         print("Count for female: ", females)
+        print("Average charges for a female:", avg_female)
         print("Count for male: ", males)
+        print("Average charges for a male:", avg_male)
     
     # functio to find each unique region patients are from
     def unique_regions(self):
@@ -89,5 +138,5 @@ patient_info.analyze_ages()
 patient_info.analyze_sexes()
 patient_info.unique_regions()
 patient_info.average_charges()
-dict1=patient_info.create_dictionary()
-print(dict1)
+PatDict=patient_info.create_dictionary()
+#print(PatDict["charges"])
