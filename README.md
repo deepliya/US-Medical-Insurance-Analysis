@@ -47,7 +47,7 @@ After this an instance named `patient_info` of the class `PatientsInfo` is creat
 ### Analyzing the age attribute
 To inspect if age has an impact on charges, the age analysis function is executed like so - `patient_info.analyze_ages()`. The following output is obtained:
 
-`Average Patient Age: 39.21 years`
+`Average Patient Age: 39.21 years`<br />
 `Average charges for patients below the age of 20: $ 8407.349`
 `Average charges for patients between the age of 20 and 30: $ 9561.751`
 `Average charges for patients between the age of 30 and 40: $ 11738.784`
