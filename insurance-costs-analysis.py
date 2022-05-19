@@ -1,5 +1,6 @@
 # importing csv library
 import csv
+import statistics
 
 # Initializing lists for diffrent attributes in insurance.csv
 ages = []
@@ -75,15 +76,18 @@ class PatientsInfo:
             if age >= 50:
                 age_g50 += 1
                 chg_g50 += charge
-
+        
+        print("----------------------------------------------------------------------")
+        print("ANALYSIS BASED ON AGE ATRRIBUTE\n")
         print ("Average Patient Age: " + str(round(total_age/len(self.patients_ages), 2)) + " years")
         print ("Average charges for patients below the age of 20: $", round(chg_20/age_20, 3))
         print ("Average charges for patients between the age of 20 and 30: $", round(chg_30/age_30, 3))
         print ("Average charges for patients between the age of 30 and 40: $", round(chg_40/age_40, 3))
         print ("Average charges for patients between the age of 40 and 50: $", round(chg_50/age_50, 3))
-        print ("Average charges for patients above the age of 50         : $", round(chg_g50/age_g50, 3))
+        print ("Average charges for patients above the age of 50         : $", round(chg_g50/age_g50, 3), "\n")
+    
 
-    # function that calculates the number of males and females in insurance.csv
+    # function that calculates the number of males and females and the average charges for each group in insurance.csv
     def analyze_sexes(self):
         females = 0
         males = 0
@@ -100,10 +104,12 @@ class PatientsInfo:
                 male_charges += charge
         avg_female = round(female_charges/females, 3)
         avg_male = round(male_charges/males, 3)
+        print("----------------------------------------------------------------------")
+        print("ANALYSIS BASED ON GENDER ATRRIBUTE\n")
         print("Count of females: ", females)
-        print("    Average charges: $", avg_female)
+        print("    Average charge for a female: $", avg_female)
         print("Count of males: ", males)
-        print("    Average charges: $", avg_male)
+        print("    Average charge for a male: $", avg_male, "\n")
     
     def analyze_bmi(self):
         undr_wt = 0
@@ -129,6 +135,8 @@ class PatientsInfo:
                 obese += 1
                 obese_ch += charge
         
+        print("----------------------------------------------------------------------")
+        print("ANALYSIS BASED ON BMI ATRRIBUTE\n")
         print("Patients underweight: ", undr_wt)
         print("    Average charges: $", round(undr_ch/undr_wt, 3))
         print("Patients healthy weight: ", norm_wt)
@@ -152,10 +160,13 @@ class PatientsInfo:
                 non_smkrs += 1
                 nonsmk_ch += charge
         
+        print("----------------------------------------------------------------------")
+        print("ANALYSIS BASED ON SMOKER ATRRIBUTE\n")
         print("Percentage of smokers in dataset: ", round(((smkrs/(smkrs+non_smkrs))*100), 3), "%")
         print("    Average charge for a smoker: $", round(smkr_ch/smkrs, 3))
         print("Percentage of non-smokers in dataset: ", round(((non_smkrs/(smkrs+non_smkrs))*100), 3), "%")
-        print("    Average charge for a non-smoker: $", round(nonsmk_ch/non_smkrs, 3))
+        print("    Average charge for a non-smoker: $", round(nonsmk_ch/non_smkrs, 3), "\n")
+        
 
     # function to find each unique region patients are from
     def unique_regions(self):
@@ -163,15 +174,25 @@ class PatientsInfo:
         for region in self.patients_regions:
             if region not in unique_regions: 
                 unique_regions.append(region)
+        
+        print("----------------------------------------------------------------------")
+        print("UNIQUE REGIONS IN THE DATASET\n")
         print (unique_regions)
 
     # method to find average yearly medical charges for patients in insurance.csv
-    def average_charges(self):
-        total_charges = 0
-        for charge in self.patients_charges:
-            total_charges += float(charge)
-        print ("Average Yearly Medical Insurance Charges: " +  
-                str(round(total_charges/len(self.patients_charges), 2)) + " dollars.")
+    def charges_stats(self):
+        mean = round(statistics.mean(insurance_charges), 2)
+        variance = round(statistics.pvariance(insurance_charges), 2)
+        st_dev = round(statistics.pstdev(insurance_charges), 2)
+
+        print("----------------------------------------------------------------------")
+        print("ANNUAL CHARGES STATS\n")
+        print("Annual charges':")
+        print("    Mean: ", mean)
+        print("    Variance: ", variance)
+        print("    Standard Deviation: ", st_dev)
+        print("----------------------------------------------------------------------")
+
 
     # method to create dictionary with all patients information
     def create_dictionary(self):
@@ -191,6 +212,6 @@ patient_info.analyze_sexes()
 patient_info.analyze_bmi()
 patient_info.analyze_smokers()
 patient_info.unique_regions()
-patient_info.average_charges()
+patient_info.charges_stats()
 PatDict=patient_info.create_dictionary()
 #print(PatDict["charges"])
