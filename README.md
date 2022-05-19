@@ -48,44 +48,44 @@ After this an instance named `patient_info` of the class `PatientsInfo` is creat
 To inspect if age has an impact on charges, the age analysis function is executed like so - `patient_info.analyze_ages()`. The following output is obtained:
 
 `Average Patient Age: 39.21 years`<br />
-`Average charges for patients below the age of 20: $ 8407.349`
-`Average charges for patients between the age of 20 and 30: $ 9561.751`
-`Average charges for patients between the age of 30 and 40: $ 11738.784`
-`Average charges for patients between the age of 40 and 50: $ 14399.204`
-`Average charges for patients above the age of 50         : $ 17902.552`
+`Average charges for patients below the age of 20: $ 8407.349`<br />
+`Average charges for patients between the age of 20 and 30: $ 9561.751`<br />
+`Average charges for patients between the age of 30 and 40: $ 11738.784`<br />
+`Average charges for patients between the age of 40 and 50: $ 14399.204`<br />
+`Average charges for patients above the age of 50         : $ 17902.552`<br />
 
 As seen from the output above it's clear that there is a pattern in the result, we can see how the annual charges increase with age, hence charges are directly proportional to age. 
 
 ### Analyzing the gender attribute
 To inspect if gender has an impact on charges, the age analysis function is executed like so - `patient_info.analyze_sexes()`. The following output is obtained:
 
-`Count of females:  662`
-&emsp;`Average charge for a female: $ 12569.579`
-`Count of males:  676`
-&emsp;`Average charge for a male: $ 13956.751`
+`Count of females:  662`<br />
+&emsp;`Average charge for a female: $ 12569.579`<br />
+`Count of males:  676`<br />
+&emsp;`Average charge for a male: $ 13956.751`<br />
 
 Here we can see that the number of females and males is almost the same and the average charges for the groups have a small difference. No useful insight can be made from this information.
 
 ### Analyzing the BMI attribute
 To inspect if BMI has an impact on charges, the age analysis function is executed like so - `patient_info.analyze_bmi()`. The following output is obtained:
 
-`Patients underweight:  20`
-&emsp;`Average charges: $ 8852.201`
-`Patients healthy weight:  242`
-&emsp;`Average charges: $ 10253.277`
-`Patients overweight:  242`
-&emsp;`Average charges: $ 10253.277`
-`Patients obese:  707`
-&emsp;`Average charges: $ 15552.335`
+`Patients underweight:  20`<br />
+&emsp;`Average charges: $ 8852.201`<br />
+`Patients healthy weight:  242`<br />
+&emsp;`Average charges: $ 10253.277`<br />
+`Patients overweight:  242`<br />
+&emsp;`Average charges: $ 10253.277`<br />
+`Patients obese:  707`<br />
+&emsp;`Average charges: $ 15552.335`<br />
 
 As seen from the output above it's clear that there is a pattern in the result, we can see how the annual charges increase with increase in BMI, hence charges are directly proportional to age.  We also observe that the number of obese people in the dataset is more than any other category.
 
 ### Analyzing the smoker attribute
 To inspect if smoker has an impact on charges, the age analysis function is executed like so - `patient_info.analyze_smokers()`. The following output is obtained:
 
-`Percentage of smokers in dataset:  20.478 %`
-&emsp;`Average charge for a smoker: $ 32050.232`
-`Percentage of non-smokers in dataset:  79.522 %`
-&emsp;`Average charge for a non-smoker: $ 8434.268`
+`Percentage of smokers in dataset:  20.478 %`<br />
+&emsp;`Average charge for a smoker: $ 32050.232`<br />
+`Percentage of non-smokers in dataset:  79.522 %`<br />
+&emsp;`Average charge for a non-smoker: $ 8434.268`<br />
 
 From the output we see that almost 80% of people from the data set smoke. We also observe that there is a big difference of `$ 23615.964` between average charges of a smoker and a non smoker. This tells us that the smoking status of a person drastically impacts charges. 
